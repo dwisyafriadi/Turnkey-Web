@@ -2,6 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const PharosBot = require("./pharos-bot");
+const config = require("./config.json");
+
+const DEFAULT_RPC_URL = config.network.rpc;
+const DEFAULT_CHAIN_ID = config.network.chainId;
 
 const app = express();
 app.set("view engine", "ejs");
@@ -21,8 +25,8 @@ app.post("/init", async (req, res) => {
   const { privateKey1 } = req.body;
 
   const bot = new PharosBot({
-    rpcUrl: process.env.RPC_URL,
-    chainId: parseInt(process.env.CHAIN_ID),
+    rpcUrl: process.env.RPC_URL || DEFAULT_RPC_URL,
+    chainId: parseInt(process.env.CHAIN_ID || DEFAULT_CHAIN_ID),
     privateKeys: [privateKey1],
   });
 
