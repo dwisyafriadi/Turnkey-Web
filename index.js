@@ -159,6 +159,14 @@ class PharosBot {
         return new Promise(resolve => setTimeout(resolve, delayMs));
     }
 
+    validateAmount(value, decimals = 18) {
+        if (value === undefined || value === null) return false;
+        if (isNaN(value) || Number(value) <= 0) return false;
+        const parts = value.toString().split('.');
+        if (parts[1] && parts[1].length > decimals) return false;
+        return true;
+    }
+
     async showMenu() {
         console.log(`\n${colors.cyan}${colors.bold}       OPENFI AUTO TRANSACTION    ${colors.reset}`);
         console.log(`${colors.green}${colors.bold} Join Telegram Channel Dasar Pemulung${colors.reset}`);
@@ -235,6 +243,10 @@ class PharosBot {
         logger.step('Starting PHRS Supply Process');
 
         const amount = await this.getUserInput('Enter amount of PHRS to supply:');
+        if (!this.validateAmount(amount, 18)) {
+            logger.error('Invalid amount entered.');
+            return;
+        }
         const details = await this.promptTransactionDetails();
         if (!details) return;
         const { txCount, delay } = details;
@@ -306,11 +318,15 @@ class PharosBot {
         const tokenAddress = CONTRACTS.TOKENS[selectedToken];
 
         const amount = await this.getUserInput(`Enter amount of ${selectedToken} to mint:`);
+        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
+        if (!this.validateAmount(amount, decimals)) {
+            logger.error('Invalid amount entered.');
+            return;
+        }
         const details = await this.promptTransactionDetails();
         if (!details) return;
         const { txCount, delay } = details;
 
-        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
         const amountWei = ethers.parseUnits(amount, decimals);
 
         for (let i = 0; i < this.wallets.length; i++) {
@@ -370,11 +386,15 @@ class PharosBot {
         const tokenAddress = CONTRACTS.TOKENS[selectedToken];
 
         const amount = await this.getUserInput(`Enter amount of ${selectedToken} to supply:`);
+        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
+        if (!this.validateAmount(amount, decimals)) {
+            logger.error('Invalid amount entered.');
+            return;
+        }
         const details = await this.promptTransactionDetails();
         if (!details) return;
         const { txCount, delay } = details;
 
-        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
         const amountWei = ethers.parseUnits(amount, decimals);
 
         for (let i = 0; i < this.wallets.length; i++) {
@@ -456,11 +476,15 @@ class PharosBot {
         const tokenAddress = CONTRACTS.TOKENS[selectedToken];
 
         const amount = await this.getUserInput(`Enter amount of ${selectedToken} to borrow:`);
+        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
+        if (!this.validateAmount(amount, decimals)) {
+            logger.error('Invalid amount entered.');
+            return;
+        }
         const details = await this.promptTransactionDetails();
         if (!details) return;
         const { txCount, delay } = details;
 
-        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
         const amountWei = ethers.parseUnits(amount, decimals);
 
         for (let i = 0; i < this.wallets.length; i++) {
@@ -524,11 +548,15 @@ class PharosBot {
         const tokenAddress = CONTRACTS.TOKENS[selectedToken];
 
         const amount = await this.getUserInput(`Enter amount of ${selectedToken} to withdraw:`);
+        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
+        if (!this.validateAmount(amount, decimals)) {
+            logger.error('Invalid amount entered.');
+            return;
+        }
         const details = await this.promptTransactionDetails();
         if (!details) return;
         const { txCount, delay } = details;
 
-        const decimals = (selectedToken === 'USDT' || selectedToken === 'USDC' || selectedToken === 'BTC') ? 6 : 18;
         const amountWei = ethers.parseUnits(amount, decimals);
 
         for (let i = 0; i < this.wallets.length; i++) {
