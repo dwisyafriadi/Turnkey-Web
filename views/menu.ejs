@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PharosBot - Menu</title>
+  </head>
+  <body>
+    <h2>📦 Wallets Loaded:</h2>
+    <ul>
+      <% wallets.forEach(wallet => { %>
+      <li><%= wallet.address %></li>
+      <% }); %>
+    </ul>
+
+    <h2>🔧 Pilih Aksi:</h2>
+    <ul>
+      <li><a href="/supply-form">1. Supply PHRS</a></li>
+      <li><a href="/mint-form">2. Mint Faucet Tokens</a></li>
+      <li><a href="/supply-form">3. Supply ERC20 Tokens</a> (coming soon)</li>
+      <li><a href="/borrow-form">4. Borrow Tokens</a></li>
+      <li><a href="/withdraw-form">5. Withdraw Tokens</a></li>
+    </ul>
+  </body>
+</html>

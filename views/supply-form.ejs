@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Supply PHRS</title>
+  </head>
+  <body>
+    <h2>🚰 Supply PHRS</h2>
+    <form action="/supply" method="post">
+      <label>Amount (PHRS):</label><br />
+      <input type="text" name="amount" required /><br /><br />
+
+      <label>Jumlah Transaksi per Wallet:</label><br />
+      <input type="number" name="txCount" required /><br /><br />
+
+      <label>Delay antar transaksi (detik):</label><br />
+      <input type="number" name="delay" required /><br /><br />
+
+      <button type="submit">Mulai Supply</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "network": {
+    "rpc": "https://testnet.dplabs-internal.com",
+    "chainId": 688688,
+    "symbol": "PHRS",
+    "explorer": "https://pharos-testnet.socialscan.io/"
+  },
+  "contracts": {
+    "LENDING_POOL": "0xa8e550710bf113db6a1b38472118b8d6d5176d12",
+    "FAUCET": "0x2e9d89d372837f71cb529e5ba85bfbc1785c69cd",
+    "SUPPLY_CONTRACT": "0xad3b4e20412a097f87cd8e8d84fbbe17ac7c89e9",
+    "TOKENS": {
+      "GOLD": "0x77f532df5f46ddff1c97cdae3115271a523fa0f4",
+      "USDT": "0x0b00fb1f513e02399667fba50772b21f34c1b5d9",
+      "TSLA": "0xcda3df4aab8a571688fe493eb1bdc1ad210c09e4",
+      "USDC": "0x48249feeb47a8453023f702f15cf00206eebdf08",
+      "NVIDIA": "0x3299cc551b2a39926bf14144e65630e533df6944",
+      "BTC": "0xa4a967fc7cf0e9815bf5c2700a055813628b65be"
+    }
+  },
+  "abi": {
+    "ERC20": [
+      "function approve(address spender, uint256 amount) external returns (bool)",
+      "function balanceOf(address account) external view returns (uint256)",
+      "function decimals() external view returns (uint8)"
+    ],
+    "FAUCET": [
+      "function mint(address _asset, address _account, uint256 _amount) external"
+    ],
+    "LENDING_POOL": [
+      "function depositETH(address lendingPool, address onBehalfOf, uint16 referralCode) external payable",
+      "function borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf) external",
+      "function withdraw(address asset, uint256 amount, address to) external"
+    ]
+  }
+}
